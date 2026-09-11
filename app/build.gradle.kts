@@ -35,6 +35,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":business-a"))
+    implementation(project(":business-b"))
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)

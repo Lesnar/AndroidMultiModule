@@ -24,4 +24,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "AndroidMultiModule"
 include(":app")
- 
+include(":base")
+include(":business-a")
+include(":business-b")
