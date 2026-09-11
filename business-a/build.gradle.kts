@@ -20,7 +20,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
+    resourcePrefix = "biz_a_"
 }
 
 dependencies {

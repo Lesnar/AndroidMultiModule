@@ -5,19 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.ui.AppBarConfiguration
-import com.jemis.business_a.databinding.BusinessAActivityMainBinding
+import com.jemis.business_a.databinding.BizAActivityMainBinding
 
 class BusinessAActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: BusinessAActivityMainBinding
+    private lateinit var binding: BizAActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = BusinessAActivityMainBinding.inflate(layoutInflater)
+        binding = BizAActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->

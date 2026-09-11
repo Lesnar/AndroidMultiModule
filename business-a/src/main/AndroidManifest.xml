@@ -5,7 +5,7 @@
         <activity
             android:name=".BusinessAActivity"
             android:exported="false"
-            android:theme="@style/Theme.AndroidMultiModule"
+            android:theme="@style/BizA.Theme"
             android:windowSoftInputMode="adjustResize" />
     </application>
 

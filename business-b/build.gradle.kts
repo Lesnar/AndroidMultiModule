@@ -21,7 +21,7 @@ android {
     buildFeatures {
         compose = true
     }
-
+    resourcePrefix = "biz_b_"
 }
 
 dependencies {
