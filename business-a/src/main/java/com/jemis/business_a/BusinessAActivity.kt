@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.jemis.base.interfaces.IUserService
 import com.jemis.base.router.RouterPath
 import com.jemis.business_a.databinding.BizAActivityMainBinding
 import com.therouter.TheRouter
@@ -63,5 +64,12 @@ class BusinessAActivity : AppCompatActivity() {
 
         // 把注入到的参数显示出来，作为「路由寻址 + 参数注入」链路走通的直观验证。
         binding.tv.text = "hello business-a\n来自：$from"
+
+        // TheRouter.get 按接口类型取跨模块服务实现（本例的实现在 business-b），
+        // 拿不到时说明提供方模块没有参与本次构建。
+        binding.btnGetUser.setOnClickListener {
+            binding.tvUserInfo.text = TheRouter.get(IUserService::class.java)?.getUserInfo()
+                ?: "未找到 IUserService 实现"
+        }
     }
 }

@@ -16,4 +16,16 @@
         android:text="hello business-a"
         android:textSize="14sp" />
 
+    <Button
+        android:id="@+id/btn_get_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取用户信息" />
+
+    <TextView
+        android:id="@+id/tv_user_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+
 </LinearLayout>
