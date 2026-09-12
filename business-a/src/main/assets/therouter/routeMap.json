@@ -1,0 +1,9 @@
+[
+  {
+    "path": "router://business-a/home",
+    "className": "com.jemis.business_a.BusinessAActivity",
+    "action": "",
+    "description": "business-a 首页",
+    "params": {}
+  }
+]

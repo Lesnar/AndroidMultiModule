@@ -1,3 +1,9 @@
+// 独立调试开关：见根目录 gradle.properties 的说明。打开后对应业务模块自己就是
+// com.android.application，AGP 不允许 app 再以 project 依赖去引用一个 application 模块，
+// 所以下面的 runtimeOnly 依赖要按同样的开关跳过。
+val businessAIsolationRun = providers.gradleProperty("businessA.isolationRun").getOrElse("false").toBoolean()
+val businessBIsolationRun = providers.gradleProperty("businessB.isolationRun").getOrElse("false").toBoolean()
+
 plugins {
     alias(libs.plugins.android.application)
     // TheRouter 字节码插件只需应用在壳工程。
@@ -50,8 +56,8 @@ dependencies {
     // runtimeOnly 只把模块打进 APK，不会放进 app 的编译期类路径，
     // 因此 app 里再也 import 不到 BusinessAActivity —— 解耦不再靠自觉，而是编译器强制的。
     // 跳转只剩路由一条路，新增业务模块时 app 的代码一行都不用改。
-    runtimeOnly(project(":business-a"))
-    runtimeOnly(project(":business-b"))
+    if (!businessAIsolationRun) runtimeOnly(project(":business-a"))
+    if (!businessBIsolationRun) runtimeOnly(project(":business-b"))
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
