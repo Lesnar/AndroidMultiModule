@@ -12,6 +12,12 @@ constraintlayout = "2.2.2"
 activityKtx = "1.13.0"
 navigationFragmentKtx = "2.10.0"
 navigationUiKtx = "2.10.0"
+# TheRouter 组件化路由框架。
+# 只能用 1.4.0-rc1：稳定版 1.3.2 依赖 AGP 7.4.2 时代的 transform-api，
+# 该 API 在 AGP 8 已被移除，与本项目的 AGP 9.4.0 不兼容。
+therouter = "1.4.0-rc1"
+# KSP 版本与 therouter-apt 所依赖的 symbol-processing-api 保持一致，避免注解处理器 API 错配。
+ksp = "2.3.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -31,9 +37,18 @@ compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+# TheRouter 运行时库：提供 TheRouter.build()/navigation()/inject() 与 @Route、@Autowired 注解。
+therouter-router = { group = "cn.therouter", name = "router", version.ref = "therouter" }
+# TheRouter 注解处理器：编译期扫描 @Route/@Autowired，为每个模块生成各自的路由表与参数注入代码。
+therouter-apt = { group = "cn.therouter", name = "apt", version.ref = "therouter" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+# TheRouter 字节码插件：把各模块生成的路由表聚合成一张总表。
+# 官方未发布插件标记坐标（cn.therouter:therouter.gradle.plugin 不存在），
+# 因此需要在 settings.gradle.kts 中将该 id 映射到 cn.therouter:plugin。
+therouter = { id = "therouter", version.ref = "therouter" }
 

@@ -1,0 +1,16 @@
+[
+  {
+    "path": "router://business-b/home",
+    "className": "com.jemis.business_b.MainActivity",
+    "action": "",
+    "description": "business-b 首页",
+    "params": {}
+  },
+  {
+    "path": "router://business-a/home",
+    "className": "com.jemis.business_a.BusinessAActivity",
+    "action": "",
+    "description": "business-a 首页",
+    "params": {}
+  }
+]

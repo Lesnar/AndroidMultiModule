@@ -1,0 +1,27 @@
+# TheRouter 混淆规则。
+# AGP 会自动合并 src/main/keepRules 下的所有 .keep 文件传给 R8，无需在 DSL 中声明。
+#
+# 说明：当前 release 配置是 optimization { enable = false }，R8 并未开启，
+# 这些规则暂时不生效。但一旦开启压缩混淆，缺了它们路由会在 release 包里静默失效
+# （debug 包正常、release 包点了没反应，是这类问题最典型的表现），所以提前备好。
+
+# @Autowired 标注的字段由编译期生成的代码按字段名直接赋值，
+# 一旦被混淆改名，注入代码就找不到字段，参数会全部丢失。
+-keepclasseswithmembers class * {
+    @com.therouter.router.Autowired <fields>;
+}
+
+# KSP 生成的路由表类（RouterMap__TheRouter__xxx）与注入类都带 @androidx.annotation.Keep，
+# 这条规则保证该注解本身被尊重，路由表不会被当作无引用代码裁掉。
+-keep,allowobfuscation @interface androidx.annotation.Keep
+-keep @androidx.annotation.Keep class * { *; }
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <methods>;
+}
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <fields>;
+}
+
+# 如果以后用路由跳转 Fragment，需放开下面这条：
+# 路由表里存的是 Fragment 的类名字符串，运行时靠反射实例化，类名被混淆就找不到了。
+#-keep public class * extends androidx.fragment.app.Fragment
